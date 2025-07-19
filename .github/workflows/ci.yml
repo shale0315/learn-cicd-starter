@@ -29,10 +29,11 @@ jobs:
       - name: Check style format
         run: test -z $(go fmt ./...)
 
+      - name: Check out code
+        run: actions/checkout@v4
+
       - name: Install staticcheck
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
       - name: Run staticcheck
-        run: |
-              export PATH=$PATH:$(go env GOPATH)/bin
-              staticcheck ./...
+        run: staticcheck ./...
