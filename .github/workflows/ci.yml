@@ -29,11 +29,14 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+
       - name: Install gosec
         run: go install github.com/securego/gosec/v2/cmd/gosec@latest
 
       - name: Run gosec
-        run: gosec ./...
+        run: |
+             export PATH=$PATH:$(go env GOPATH/bin)
+             gosec ./...
 
   style:
     name: Style
